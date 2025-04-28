@@ -1,0 +1,50 @@
+\' Assignment 3 - Use Case Digram
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FDF2E9
+  BorderColor black
+  ArrowColor DarkSlateGray
+}
+
+actor User
+actor Trainer
+actor "System" as System
+
+rectangle "Pokémon Tournament System" {
+
+  ' User interactions
+  User --> (Start Battle)
+  User --> (Run Tournament)
+  User --> (View Pokémon Info)
+  User --> (Set/Remove Random Seed)
+  User --> (Exit Simulation)
+
+  ' Trainer interactions
+  Trainer --> (Customize Pokémon Skills)
+  Trainer --> (Create Persistent Pokémon)
+  Trainer --> (Assign Abilities)
+
+  ' System internal responsibilities
+  System --> (Execute Battles)
+  System --> (Manage Pokémon Records)
+  System --> (Store & Retrieve Data)
+  System --> (Evaluate Battle Outcome)
+
+  ' Use case relationships
+  (Start Battle) --> (Execute Battles) : <<include>>
+  (Run Tournament) --> (Execute Battles) : <<include>>
+  (Run Tournament) --> (Track Tournament Progress) : <<include>>
+
+  (Customize Pokémon Skills) --> (Assign Abilities) : <<include>>
+
+  (Create Persistent Pokémon) --> (Store & Retrieve Data) : <<include>>
+  (View Pokémon Info) --> (Manage Pokémon Records) : <<include>>
+
+  (Execute Battles) --> (Evaluate Battle Outcome) : <<include>>
+  (Evaluate Battle Outcome) --> (Manage Pokémon Records) : <<include>>
+}
+
+@enduml
