@@ -1,0 +1,9 @@
+=== Experiment Results ===
+Original Strategy Success Rate: 100.00%
+Original Strategy Avg Final Winnings: $80.00
+Original Strategy Expectation: $80.00
+
+Realistic Strategy Success Rate: 63.60%
+Realistic Strategy Bankruptcy Rate: 36.40%
+Realistic Strategy Avg Final Winnings: $-42.30
+Realistic Strategy Expectation: $-42.30

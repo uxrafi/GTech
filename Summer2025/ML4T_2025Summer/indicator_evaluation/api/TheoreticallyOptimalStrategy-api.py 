@@ -1,0 +1,37 @@
+testPolicy(symbol="AAPL", sd=dt.datetime(2010, 1, 1), ed=dt.datetime(2011,12,31), sv = 100000)
+
+    Code implementing a TheoreticallyOptimalStrategy. It should implement testPolicy(), which returns a trades Pandas.DataFrame
+
+    Parameters
+        symbol    - the stock symbol to act on
+        sd        - A DateTime object that represents the start date
+        ed        - A DateTime object that represents the end date
+        sv        - Start value of the portfolio
+
+    Returns
+        A single column data frame, indexed by date, whose values represent trades for each trading day 
+       (from the start date to the end date of a given period). Legal values are +1000.0 indicating a BUY 
+       of 1000 shares, -1000.0 indicating a SELL of 1000 shares, and 0.0 indicating NOTHING. Values of +2000 
+       and -2000 for trades are also legal so long as net holdings are constrained to -1000, 0, and 1000. 
+       Note: The format of this data frame differs from the one developed in a prior project.   
+
+    Return Type
+        pandas.DataFrame
+
+
+author()
+
+    Returns
+        The GT username of the student
+
+    Return type
+        str
+
+study_group()
+    
+    Returns
+        A comma separated string of GT_Name of each member of your study group
+        # Example: "gburdell3, jdoe77, tbalch7" or "gburdell3" if a single individual working alone
+
+    Return type
+        str
