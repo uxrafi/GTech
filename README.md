@@ -23,7 +23,7 @@ The repository is structured as follows:
 OCSMS    
 │  
 ├── SPRING 2025/    
-│   ├── CS6310 /
+│   ├── CS6310/
 |     ├── Assignment 1/     
 │     └── Assignment 3/   
 │  
