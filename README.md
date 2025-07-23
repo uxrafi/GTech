@@ -26,7 +26,6 @@ OCSMS
 │   ├── CS6310/ 
 │     
        ├── Assignment 1/ 
-│     
        └── Assignment 3/   
 │  
 ├── SUMMER 2025/   
