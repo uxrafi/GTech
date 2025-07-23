@@ -1,4 +1,4 @@
-# 🎓 Georgia Tech OMSCS
+# Georgia Tech OMSCS
 
 Welcome to my personal repository for coursework completed as part of the Online Master of Science in Computer Science (OMSCS) program at Georgia Institute of Technology.  
 
@@ -6,7 +6,7 @@ This repository includes assignments, projects, and related materials organized 
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [Semesters](#semesters)
 - [Installation](#installation)
@@ -16,7 +16,7 @@ This repository includes assignments, projects, and related materials organized 
 
 
 
-## 📁 Semesters
+## Semesters
 
 The repository is structured as follows:
 
@@ -48,14 +48,14 @@ OCSMS
 
 
 Each course folder contains:
-- 📘 Assignment code  
-- 📝 Project reports  
-- 🔧 Helper scripts  
-- 📄 Documentation/notes
+- Assignment code  
+- Project reports  
+- Helper scripts  
+- Documentation/notes
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 To explore solutions from a specific course:
 1. Navigate to the appropriate semester folder.
@@ -67,20 +67,20 @@ To explore solutions from a specific course:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This repository serves as a personal academic archive.  
 External contributions are not expected, but feel free to fork or reference the content for your own learning.
 
 ---
 
-## 📜 License
+## License
 
 This repository is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ---
 
-## 📬 Contact
+## Contact
 
 **Name**: Umar Rafi  
 **Email**: [uxrafi@hotmail.com](mailto:uxrafi@hotmail.com)  
