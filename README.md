@@ -6,14 +6,16 @@ This repository includes assignments, projects, and related materials organized 
 
 ---
 
-## 📚 Current Semester Folders
+## 📚 Table of Contents
 
-- **Spring 2025**
-  - [`CS6310 - Software Architecture and Design`](./Spring2025/CS6310)
-- **Summer 2025**
-  - [`CS7646 - Machine Learning for Trading`](./Summer2025/CS7646)
+    - [Semesters](#semesters)
+    - [Assignments](#assignments)
+    - [Project Structure](#project-structure)
+    - [Installation](#installation)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Contact](#contact)
 
----
 
 ## 📁 Project Structure
 
