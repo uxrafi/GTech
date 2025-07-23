@@ -24,8 +24,8 @@ OCSMS
 │  
 ├── SPRING 2025/     
 │   ├── CS6310/ 
-│├── Assignment 1/ 
-│└── Assignment 3/   
+│     ├── Assignment 1/ 
+│     └── Assignment 3/   
 │  
 ├── SUMMER 2025/   
 │   ├── CS7646/   
@@ -38,8 +38,7 @@ OCSMS
 │     ├── Project 7/     
 │     └── Project 8/  
 │ 
-│
-├── FALL 2025 /    
+├── FALL 2025/    
 │   ├── CS7641/    
 │     ├── Week 2/    
 │     ├── Week 3/  
