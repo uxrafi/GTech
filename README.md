@@ -62,8 +62,8 @@ To explore solutions from a specific course:
 2. Open the course directory.
 3. Review assignment notebooks, Python scripts, or writeups.
 
-> **Note**: These materials are for educational reference only.  
-> Please comply with the **Georgia Tech Honor Code** and **OMSCS Academic Integrity Policy**.
+> Note: These materials are for educational reference only.  
+> Please comply with the Georgia Tech Honor Code and OMSCS Academic Integrity Policy.
 
 ---
 
