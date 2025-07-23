@@ -1,6 +1,7 @@
 # 🎓 Georgia Tech OMSCS
 
 Welcome to my personal repository for coursework completed as part of the **Online Master of Science in Computer Science (OMSCS)** program at **Georgia Institute of Technology**.  
+
 This repository includes assignments, projects, and related materials organized by semester and course.
 
 ---
