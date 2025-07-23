@@ -22,26 +22,27 @@ The repository is structured as follows:
 OCSMS    
 │  
 ├── SPRING 2025/    
-│ ├── CS6310 /
-|   ├── Assignment 1/     
-|   └── Assignment 3/   
+│   ├── CS6310 /
+|     ├── Assignment 1/     
+│     └── Assignment 3/   
 │  
 ├── SUMMER 2025/  
-│ ├── CS7646/  
-│   ├── Project 1/   
-│   ├── Project 2/ 
-│   └── Project 3/ 
-│   ├── Project 4/   
-│   ├── Project 5/ 
-│   └── Project 6/ 
-│   ├── Project 7/    
-│   └── Project 8/ 
-|  
+│   ├── CS7646/  
+│     ├── Project 1/   
+│     ├── Project 2/ 
+│     ├── Project 3/ 
+│     ├── Project 4/   
+│     ├── Project 5/ 
+│     ├── Project 6/  
+│     ├── Project 7/    
+│     └── Project 8/ 
+│ 
+│
 ├── FALL 2025 /    
-│ ├── CS/    
-│ ├── Week 2/    
-│ ├── Week 3/  
-│ └── Week ...      
+│     ├── CS7641/    
+│     ├── Week 2/    
+│     ├── Week 3/  
+│     └── Week ...      
 │      
 └── README.md  
 
