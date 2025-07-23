@@ -8,13 +8,14 @@ This repository includes assignments, projects, and related materials organized 
 
 ## 📚 Table of Contents
 
-- [📚 Semesters](#📚-semesters)
-- [📝 Assignments](#📝-assignments)
-- [📁 Project Structure](#📁-project-structure)
-- [⚙️ Installation](#⚙️-installation)
-- [🤝 Contributing](#🤝-contributing)
-- [📜 License](#📜-license)
-- [📬 Contact](#📬-contact)
+- [Semesters](#semesters)
+- [Assignments](#assignments)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
 
 
 ## 📁 Project Structure
