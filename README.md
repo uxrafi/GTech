@@ -24,8 +24,8 @@ OCSMS
 │  
 ├── SPRING 2025     
     ├── CS6310  
-      ├── Assignment 1
-      └── Assignment 3
+      ├── [Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201)
+      └── [Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203)
 | 
 |
 ├── SUMMER 2025  
