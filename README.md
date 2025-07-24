@@ -9,7 +9,7 @@ This repository includes assignments, projects, and related materials organized 
 ## Table of Contents
 
 - [Semesters](#semesters)
-- [Installation](#installation)
+- [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
