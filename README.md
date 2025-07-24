@@ -28,8 +28,8 @@ OCSMS
        └── Assignment 3/  
 │  
 ├── SUMMER 2025/   
-│   ├── [CS7646](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer)   
-│     ├── Project 1/    
+│   ├── [CS7646](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer) 
+│     ├── [Project 1](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)   
 │     ├── Project 2/  
 │     ├── Project 3/  
 │     ├── Project 4/    
