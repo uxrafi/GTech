@@ -28,7 +28,7 @@ OCSMS
        └── Assignment 3/  
 │  
 ├── SUMMER 2025/   
-│   ├── CS7646/   
+│   ├── CS7646 - [Assignment 2 - Model Representation](https://github.com/uxrafi/Stanford/blob/main/Part%201-Supervised%20Machine%20Learning/1.%20Week%201/1.%20Regression%20Model/C1_W1_Lab02_Model_Representation_Soln.ipynb)/   
 │     ├── Project 1/    
 │     ├── Project 2/  
 │     ├── Project 3/  
