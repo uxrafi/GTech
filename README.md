@@ -25,19 +25,28 @@ OCSMS
 ├── SPRING 2025     
 │   ├── CS6310  
 |      ├── Assignment 1
+
 |      └── Assignment 3  
 │  
 ├── SUMMER 2025  
 │   ├── [CS7646](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer)
 
-│     ├── [Project 1](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)   
-│     ├── [Project 2](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/optimize_something))
-│     ├── [Project 3](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/assess_learners) 
-│     ├── [Project 4](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)   
+│     ├── [Project 1](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)
+
+│     ├── [Project 2](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/optimize_something)
+
+│     ├── [Project 3](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/assess_learners)
+
+│     ├── [Project 4](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)
+
 │     ├── [Project 5](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/marketsim)
+
 │     ├── [Project 6](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/indicator_evaluation)
-│     ├── [Project 7](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/qlearning_robot)  
+
+│     ├── [Project 7](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/qlearning_robot)
+
 │     └── [Project 8](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/strategy_evaluation)
+
 │ 
 ├── FALL 2025    
 │   ├── CS7641    
