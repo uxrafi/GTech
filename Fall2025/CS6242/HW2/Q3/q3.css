@@ -1,0 +1,39 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+svg {
+    width: 1000px;
+    height: 700px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    display: block;
+}
+
+.line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+circle.rank-marker {
+    fill: orange;
+    stroke: black;
+    stroke-width: 1px;
+}
+
+text.axis-label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+text.line-label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#signature {
+    text-align: right;
+    font-weight: bold;
+    margin-right: 50px;
+    font-size: 14px;
+}

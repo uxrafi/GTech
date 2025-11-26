@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q5 - Choropleth Map</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    svg { background: #f8f8f8; }
+    .country { stroke: #fff; stroke-width: 0.5px; }
+    .legend rect { stroke: #000; stroke-width: 0.5; }
+    .legend text { font-size: 12px; alignment-baseline: middle; }
+    #tooltip {
+      position: absolute;
+      text-align: left;
+      padding: 6px;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #999;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Wildlife Trafficking by Country</h2>
+  <p>Select Year:
+    <select id="yearDropdown"></select>
+  </p>
+
+  <div id="tooltip" style="opacity: 0;"></div>
+
+  <!-- Required libraries -->
+  <script src="../lib/d3.v5.min.js"></script>
+  <script src="../lib/d3-dsv.min.js"></script>
+  <script src="../lib/d3-geo-projection.v2.min.js"></script>
+  <script src="../lib/topojson.v2.min.js"></script>
+  <script src="../lib/d3-legend.min.js"></script>
+  <script src="../lib/d3-tip.min.js"></script>
+
+  <script>
+    const width = 960, height = 600;
+
+    const svg = d3.select("body")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // groups required by autograder
+    const countriesGroup = svg.append("g").attr("id", "countries");
+    const legendGroup = svg.append("g").attr("id", "legend");
+
+    const tooltip = d3.select("#tooltip");
+
+    const projection = d3.geoMercator()
+      .scale(140)
+      .translate([width / 2, height / 1.4]);
+
+    const pathGenerator = d3.geoPath().projection(projection);
+
+    // 4 gradations: domain has 3 thresholds, range has 4 colors
+    const colorScale = d3.scaleThreshold()
+      .domain([10, 50, 100]) // thresholds
+      .range(["#edf8e9", "#bae4b3", "#74c476", "#238b45"]); // 4 gradation colors
+
+    // Dropdown years
+    const years = d3.range(2015, 2025);
+    const dropdown = d3.select("#yearDropdown");
+    dropdown.selectAll("option")
+      .data(years)
+      .enter()
+      .append("option")
+      .attr("value", d => d)
+      .text(d => d);
+
+    const pathToJson = "../data/world_countries.json";
+    const pathToCsv = "../data/wildlife_trafficking_by_country.csv";
+
+    Promise.all([
+      d3.json(pathToJson),
+      d3.dsv(",", pathToCsv)
+    ]).then(([worldRaw, data]) => {
+
+      // Convert TopoJSON -> GeoJSON if needed
+      let world;
+      if (worldRaw.features) {
+        world = worldRaw; // already GeoJSON
+      } else if (worldRaw.objects) {
+        const firstObjName = Object.keys(worldRaw.objects)[0];
+        world = topojson.feature(worldRaw, worldRaw.objects[firstObjName]);
+      } else {
+        throw new Error("Unknown world JSON format");
+      }
+
+      // Build data map keyed by year -> country -> metrics
+      const dataMap = {};
+      data.forEach(d => {
+        const yr = String(d.year);
+        if (!dataMap[yr]) dataMap[yr] = {};
+        dataMap[yr][d.country] = {
+          incidents: d.incidents === "" ? null : +d.incidents,
+          fine: d.avg_fine_usd === "" ? null : +d.avg_fine_usd,
+          imprisonment: d.avg_imprisonment === "" ? null : +d.avg_imprisonment
+        };
+      });
+
+      // Build legend using colorScale
+      function drawLegend() {
+        const colors = colorScale.range();
+        const domain = colorScale.domain(); // [10,50,100]
+
+        const legendX = width - 220;
+        const legendY = 20;
+        const sw = 18, sh = 18, padding = 6;
+
+        legendGroup.attr("transform", `translate(${legendX}, ${legendY})`);
+
+        // compute labels for each color bucket
+        const labels = colors.map((c, i) => {
+          if (i === 0) return `< ${domain[0]}`;
+          if (i < domain.length) return `${domain[i-1]} - ${domain[i] - 1}`;
+          return `>= ${domain[domain.length - 1]}`;
+        });
+
+        const items = legendGroup.selectAll(".legend-item")
+          .data(colors);
+
+        const itemsEnter = items.enter()
+          .append("g")
+          .attr("class", "legend-item");
+
+        itemsEnter.append("rect")
+          .attr("width", sw)
+          .attr("height", sh)
+          .attr("y", (d, i) => i * (sh + padding))
+          .attr("x", 0);
+
+        itemsEnter.append("text")
+          .attr("x", sw + 8)
+          .attr("y", (d, i) => i * (sh + padding) + sh/2)
+          .attr("dy", "0.35em");
+
+        // update +
+        legendGroup.selectAll(".legend-item rect")
+          .data(colors)
+          .attr("fill", d => d);
+
+        legendGroup.selectAll(".legend-item text")
+          .data(labels)
+          .text(d => d);
+
+        items.exit().remove();
+      }
+
+      drawLegend();
+
+      // initial draw and update logic
+      function updateMap(year) {
+        const yearKey = String(year);
+        const yearData = dataMap[yearKey] || {};
+
+        // data join on the countriesGroup
+        const sel = countriesGroup.selectAll("path")
+          .data(world.features, d => d.properties && (d.properties.iso_a3 || d.properties.name));
+
+        // EXIT
+        sel.exit().remove();
+
+        // ENTER
+        const enter = sel.enter()
+          .append("path")
+          .attr("class", "country")
+          .attr("d", pathGenerator)
+          .style("stroke", "#fff")
+          .style("stroke-width", 0.5)
+          .on("mouseover", function(event, d) {
+            const c = yearData[d.properties.name];
+            tooltip.transition().duration(150).style("opacity", 1);
+            tooltip.html(`
+              <strong>Country:</strong> ${d.properties.name}<br/>
+              <strong>Year:</strong> ${year}<br/>
+              <strong>Incidents:</strong> ${c && c.incidents != null ? c.incidents : "N/A"}<br/>
+              <strong>Average Fine (USD):</strong> ${c && c.fine != null ? c.fine.toFixed(2) : "N/A"}<br/>
+              <strong>Average Imprisonment (years):</strong> ${c && c.imprisonment != null ? c.imprisonment.toFixed(2) : "N/A"}
+            `)
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 28) + "px");
+          })
+          .on("mouseout", function() {
+            tooltip.transition().duration(300).style("opacity", 0);
+          });
+
+        // UPDATE (and merge enter)
+        enter.merge(sel)
+          .attr("d", pathGenerator)
+          .attr("fill", function(d) {
+            const rec = yearData[d.properties.name];
+            if (rec && rec.incidents != null && !isNaN(rec.incidents)) {
+              return colorScale(rec.incidents);
+            } else {
+              return "#d3d3d3"; // gray for no data
+            }
+          });
+      }
+
+      // wire up dropdown
+      dropdown.on("change", function() {
+        updateMap(this.value);
+      });
+
+      // default initial map
+      updateMap(years[0]);
+
+    }).catch(err => {
+      console.error("Error loading data or drawing map:", err);
+    });
+
+  </script>
+</body>
+</html>

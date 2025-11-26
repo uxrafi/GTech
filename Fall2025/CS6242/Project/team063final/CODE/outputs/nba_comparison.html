@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NBA Transparency Predictor</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #f2f5f7 0%, #e3e9ef 100%);
+      text-align: center;
+      margin: 0;
+      padding: 40px 20px;
+      color: #1d3557;
+    }
+    h1 { margin-bottom: 6px; font-weight: 600; }
+    .sub { font-size: 14px; color: #444; margin-bottom: 8px; }
+
+    #controls {
+      margin: 18px auto 12px;
+      padding: 14px 18px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      margin: 0 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    button {
+      background: #1d3557;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover { background: #2a507e; }
+
+    #resetBtn { background:#c0392b; }
+    #resetBtn:hover { background:#a62d23; }
+
+    #predCard {
+      max-width: 760px;
+      margin: 10px auto 15px;
+      background: white;
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      text-align: left;
+      font-size: 14px;
+      display: none;
+      opacity: 1;
+    }
+    #predCard h3 { margin: 0 0 4px; }
+    .muted { color:#666; font-size: 13px; }
+
+    #confidenceBarWrap {
+      margin-top: 10px;
+      background: #eee;
+      height: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    #confidenceBar {
+      height: 14px;
+      width: 0%;
+      background: #1d3557;
+      transition: width 0.9s ease; /* animated confidence bar */
+    }
+
+    #chart-area {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin-top: 12px;
+    }
+
+    svg {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    .axisLabel { font-size: 12px; fill: #333; }
+    .areaA { fill: steelblue; fill-opacity: 0.5; }
+    .areaB { fill: orange; fill-opacity: 0.5; }
+    .line { stroke-width: 2px; fill: none; }
+
+    #barContainer, #rawContainer {
+      max-width: 760px;
+      margin: 18px auto;
+      padding: 15px 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      text-align: left;
+      display: none;
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    #rawToggleBtn {
+      margin-top: 8px;
+      background: #444;
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 12.5px;
+    }
+    th, td {
+      padding: 6px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      text-align: left;
+      background: #f7f7f7;
+    }
+
+    /* Fade helpers */
+    .fadeOut { opacity: 0 !important; }
+    .fadeIn  { opacity: 1 !important; }
+
+    /* Loading spinner */
+    #loadingBox {
+      display: none;
+      max-width: 220px;
+      margin: 15px auto 0;
+      padding: 10px 12px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      font-size: 14px;
+      color: #333;
+    }
+
+    .spinner {
+      margin: 8px auto 0;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #ddd;
+      border-top: 3px solid #1d3557;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    /* Modal */
+    #modalOverlay {
+      display: none;
+      position: fixed;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+    }
+    #modalBox {
+      background: white;
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 18px 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      text-align: left;
+    }
+    #modalBox h3 { margin-top: 0; }
+    #closeModal {
+      float:right;
+      cursor:pointer;
+      font-size: 18px;
+      color:#555;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>NBA Transparency Predictor</h1>
+
+  <div class="sub">
+    This tool predicts NBA winners using an <b>explainable machine learning model</b>.
+  </div>
+  <div class="sub">
+    Unlike betting-site algorithms, every prediction is broken into intuitive factors
+    like efficiency, momentum, defense, and fatigue.
+  </div>
+
+  <div id="controls">
+    <label for="teamA">Home Team:</label>
+    <select id="teamA"></select>
+
+    <label for="teamB">Away Team:</label>
+    <select id="teamB"></select>
+
+    <button id="predictBtn">Explain This Matchup</button>
+    <button id="openModalBtn" style="background:#888;">What do categories mean?</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div id="loadingBox">
+    Running model...
+    <div class="spinner"></div>
+  </div>
+
+  <div id="predCard">
+    <h3 id="predTitle"></h3>
+    <div class="muted">
+      Predictions are based only on interpretable trends — no hidden odds.
+    </div>
+    <p id="predProb" style="font-size:16px; margin-bottom:6px;"></p>
+
+    <div class="muted">Model confidence (higher = stronger edge):</div>
+    <div id="confidenceBarWrap">
+      <div id="confidenceBar"></div>
+    </div>
+    <div id="confidenceLabel" class="muted" style="margin-top:4px;"></div>
+
+    <ul id="edges" style="margin-top:10px;"></ul>
+
+    <button id="rawToggleBtn">Show Raw Underlying Stats</button>
+  </div>
+
+  <div id="chart-area">
+    <svg id="singleRadar" width="620" height="520"></svg>
+  </div>
+
+  <div id="barContainer">
+    <h3 style="margin-top:0;">Which factors influenced this prediction?</h3>
+    <svg id="barChart" width="700" height="260"></svg>
+  </div>
+
+  <div id="rawContainer">
+    <h3 style="margin-top:0;">Raw stats driving the categories</h3>
+    <div id="rawTables"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalOverlay">
+    <div id="modalBox">
+      <span id="closeModal">✕</span>
+      <h3>Category Definitions (Transparency View)</h3>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+<script>
+  const features = ["Offense","Defense","Momentum","Endurance","Hustle"];
+  const angleSlice = (2 * Math.PI) / features.length;
+
+  let teamDisplayNames = [];
+  let latestResponse = null;
+
+  // ------------------------
+  // Load teams for dropdown
+  // ------------------------
+  d3.csv("../data/teams.csv").then(teams => {
+    teamDisplayNames = teams.map(d => `${d.CITY} ${d.NICKNAME}`.trim()).sort();
+
+    const A = d3.select("#teamA");
+    const B = d3.select("#teamB");
+
+    teamDisplayNames.forEach(name => {
+      A.append("option").attr("value", name).text(name);
+      B.append("option").attr("value", name).text(name);
+    });
+
+    A.property("value", teamDisplayNames[0]);
+    B.property("value", teamDisplayNames[1]);
+  });
+
+  // ------------------------
+  // Reset / smooth clear
+  // ------------------------
+  function resetPrediction() {
+    latestResponse = null;
+
+    d3.select("#predCard").classed("fadeOut", true);
+    d3.select("#barContainer").classed("fadeOut", true);
+    d3.select("#rawContainer").classed("fadeOut", true);
+    d3.select("#singleRadar").classed("fadeOut", true);
+
+    setTimeout(() => {
+      d3.select("#predCard").style("display", "none").classed("fadeOut", false);
+      d3.select("#barContainer").style("display", "none").classed("fadeOut", false);
+      d3.select("#rawContainer").style("display", "none").classed("fadeOut", false);
+
+      d3.select("#singleRadar").selectAll("*").remove().classed("fadeOut", false);
+      d3.select("#barChart").selectAll("*").remove();
+
+      d3.select("#confidenceBar").style("width", "0%");
+      d3.select("#confidenceLabel").text("");
+
+      d3.select("#edges").selectAll("*").remove();
+    }, 450);
+  }
+
+  document.getElementById("resetBtn").addEventListener("click", resetPrediction);
+  document.getElementById("teamA").addEventListener("change", resetPrediction);
+  document.getElementById("teamB").addEventListener("change", resetPrediction);
+
+  // ------------------------
+  // Radar Draw
+  // ------------------------
+  function drawSingleRadar(teamA, teamB, dataA, dataB) {
+    const svg = d3.select("#singleRadar");
+    svg.selectAll("*").remove();
+
+    const width = +svg.attr("width"),
+          height = +svg.attr("height"),
+          radius = Math.min(width, height) / 2 - 70,
+          g = svg.append("g").attr("transform", `translate(${width/2}, ${height/2})`);
+
+    const scale = d3.scaleLinear().domain([0, 100]).range([0, radius]);
+    const levels = 5;
+
+    for (let i=0;i<levels;i++){
+      g.append("circle")
+        .attr("r", radius * ((i+1)/levels))
+        .attr("fill","none")
+        .attr("stroke","#ccc");
+    }
+
+    features.forEach((f,i)=>{
+      const angle = angleSlice*i - Math.PI/2;
+      const x = Math.cos(angle)*(radius+25);
+      const y = Math.sin(angle)*(radius+25);
+      g.append("text")
+        .attr("class","axisLabel")
+        .attr("x",x).attr("y",y)
+        .attr("text-anchor","middle")
+        .text(f);
+    });
+
+    const radarLine = d3.lineRadial()
+      .radius((d,i)=>scale(d))
+      .angle((d,i)=>i*angleSlice)
+      .curve(d3.curveCardinalClosed);
+
+    g.append("path").attr("class","areaA").attr("d", radarLine(dataA));
+    g.append("path").attr("class","line").attr("stroke","steelblue").attr("d", radarLine(dataA));
+
+    g.append("path").attr("class","areaB").attr("d", radarLine(dataB));
+    g.append("path").attr("class","line").attr("stroke","orange").attr("d", radarLine(dataB));
+
+    const legend = svg.selectAll(".legend")
+      .data([{team:teamA,color:"steelblue"},{team:teamB,color:"orange"}])
+      .enter().append("g")
+      .attr("class","legend")
+      .attr("transform",(d,i)=>`translate(40, ${40+i*25})`);
+
+    legend.append("rect")
+      .attr("width",15).attr("height",15)
+      .attr("fill",d=>d.color).attr("opacity",0.7);
+
+    legend.append("text")
+      .attr("x",25).attr("y",12)
+      .text(d=>d.team)
+      .style("font-size","13px")
+      .style("fill","#333");
+  }
+
+  // ------------------------
+  // Contribution bars
+  // ------------------------
+  function drawContributionBars(contrib) {
+    const svg = d3.select("#barChart");
+    svg.selectAll("*").remove();
+
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+    const margin = { top: 20, right: 30, bottom: 35, left: 120 };
+
+    const cats = Object.keys(contrib);
+    const values = cats.map(c => contrib[c]);
+
+    const x = d3.scaleLinear()
+      .domain([d3.min(values), d3.max(values)])
+      .nice()
+      .range([margin.left, width - margin.right]);
+
+    const y = d3.scaleBand()
+      .domain(cats)
+      .range([margin.top, height - margin.bottom])
+      .padding(0.25);
+
+    svg.append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x).ticks(5));
+
+    svg.append("g")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y));
+
+    svg.selectAll(".bar")
+      .data(cats)
+      .enter().append("rect")
+      .attr("y", d => y(d))
+      .attr("x", d => x(Math.min(0, contrib[d])))
+      .attr("height", y.bandwidth())
+      .attr("width", d => Math.abs(x(contrib[d]) - x(0)))
+      .attr("fill", d => contrib[d] >= 0 ? "steelblue" : "orange")
+      .attr("opacity", 0.75);
+
+    svg.selectAll(".label")
+      .data(cats)
+      .enter().append("text")
+      .attr("x", d => x(contrib[d]) + (contrib[d] >= 0 ? 5 : -5))
+      .attr("y", d => y(d) + y.bandwidth() / 2 + 4)
+      .attr("text-anchor", d => contrib[d] >= 0 ? "start" : "end")
+      .style("font-size", "13px")
+      .text(d => contrib[d].toFixed(1));
+  }
+
+  // ------------------------
+  // Raw stats tables
+  // ------------------------
+  function renderRawTables(resp){
+    const home = resp.home;
+    const away = resp.away;
+    const rawH = resp.raw_home;
+    const rawA = resp.raw_away;
+
+    const container = d3.select("#rawTables");
+    container.selectAll("*").remove();
+
+    features.forEach(cat => {
+      const hStats = rawH[cat] || {};
+      const aStats = rawA[cat] || {};
+      const keys = Array.from(new Set([...Object.keys(hStats), ...Object.keys(aStats)]));
+
+      const section = container.append("div").style("margin-bottom","12px");
+      section.append("h4").text(cat);
+
+      const table = section.append("table");
+      const thead = table.append("thead").append("tr");
+      thead.append("th").text("Stat");
+      thead.append("th").text(home);
+      thead.append("th").text(away);
+
+      const tbody = table.append("tbody");
+      keys.forEach(k=>{
+        const tr = tbody.append("tr");
+        tr.append("td").text(k);
+        tr.append("td").text((hStats[k] ?? 0).toFixed(3));
+        tr.append("td").text((aStats[k] ?? 0).toFixed(3));
+      });
+    });
+  }
+
+  // ------------------------
+  // Smooth crossfade show
+  // ------------------------
+  function showPrediction(resp) {
+    // crossfade out old view if any
+    d3.select("#singleRadar").classed("fadeOut", true);
+    d3.select("#barContainer").classed("fadeOut", true);
+    d3.select("#predCard").classed("fadeOut", true);
+    d3.select("#rawContainer").classed("fadeOut", true);
+
+    setTimeout(() => {
+      latestResponse = resp;
+
+      const home = resp.home;
+      const away = resp.away;
+
+      const catsH = resp.categories_home;
+      const catsA = resp.categories_away;
+
+      const dataA = features.map(f => catsH[f]);
+      const dataB = features.map(f => catsA[f]);
+
+      drawSingleRadar(home, away, dataA, dataB);
+      drawContributionBars(resp.contributions);
+
+      // show panels
+      d3.select("#predCard").style("display","block");
+      d3.select("#barContainer").style("display","block");
+
+      // prediction text
+      const prob = (resp.home_win_prob * 100).toFixed(1);
+      const winner = resp.predicted_home_win ? home : away;
+
+      d3.select("#predTitle").text(`Prediction: ${winner} favored`);
+      d3.select("#predProb").html(`<b>${home}</b> win probability: <b>${prob}%</b>`);
+
+      // confidence meter
+      const confPct = (resp.confidence * 100).toFixed(0);
+      // reset first so animation is visible
+      d3.select("#confidenceBar").style("width","0%");
+      setTimeout(() => {
+        d3.select("#confidenceBar").style("width", confPct + "%");
+      }, 30);
+      d3.select("#confidenceLabel").text(`Confidence: ${confPct}%`);
+
+      // edges list
+      const edges = [];
+      features.forEach(f => {
+        const diff = catsH[f] - catsA[f];
+        if (Math.abs(diff) >= 4) {
+          edges.push(diff > 0
+            ? `${home} has the edge in ${f}`
+            : `${away} has the edge in ${f}`
+          );
+        }
+      });
+
+      const ul = d3.select("#edges");
+      ul.selectAll("*").remove();
+      edges.forEach(e => ul.append("li").text(e));
+
+      // hide raw stats by default
+      d3.select("#rawContainer").style("display","none");
+
+      // fade in new view
+      d3.select("#singleRadar").classed("fadeOut", false).classed("fadeIn", true);
+      d3.select("#barContainer").classed("fadeOut", false).classed("fadeIn", true);
+      d3.select("#predCard").classed("fadeOut", false).classed("fadeIn", true);
+
+    }, 450);
+  }
+
+  // ------------------------
+  // Predict call + spinner
+  // ------------------------
+  async function predictMatchup() {
+    const home = document.getElementById("teamA").value;
+    const away = document.getElementById("teamB").value;
+
+    // show loading
+    d3.select("#loadingBox").style("display","block");
+    document.getElementById("predictBtn").disabled = true;
+
+    try {
+      const resp = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({home_team: home, away_team: away})
+      });
+
+      if (!resp.ok) {
+        alert("Prediction failed. Check backend + file paths.");
+        return;
+      }
+
+      const json = await resp.json();
+      showPrediction(json);
+    } finally {
+      // hide loading
+      d3.select("#loadingBox").style("display","none");
+      document.getElementById("predictBtn").disabled = false;
+    }
+  }
+
+  document.getElementById("predictBtn").addEventListener("click", predictMatchup);
+
+  // raw stats toggle
+  document.getElementById("rawToggleBtn").addEventListener("click", ()=>{
+    const raw = d3.select("#rawContainer");
+    const visible = raw.style("display") !== "none";
+    if (!latestResponse) return;
+
+    if (visible) {
+      raw.classed("fadeOut", true);
+      setTimeout(()=> raw.style("display","none").classed("fadeOut", false), 350);
+    } else {
+      renderRawTables(latestResponse);
+      raw.style("display","block").classed("fadeIn", true);
+    }
+  });
+
+  // modal
+  const modalOverlay = document.getElementById("modalOverlay");
+  document.getElementById("openModalBtn").addEventListener("click", ()=>{
+    if (!latestResponse) {
+      alert("Run a prediction first so we can show category explanations.");
+      return;
+    }
+    const desc = latestResponse.category_descriptions;
+    const box = d3.select("#modalContent");
+    box.selectAll("*").remove();
+    features.forEach(f=>{
+      box.append("p").html(`<b>${f}:</b> ${desc[f]}`);
+    });
+    modalOverlay.style.display = "block";
+  });
+
+  document.getElementById("closeModal").addEventListener("click", ()=>{
+    modalOverlay.style.display = "none";
+  });
+
+  modalOverlay.addEventListener("click", (e)=>{
+    if (e.target === modalOverlay) modalOverlay.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
