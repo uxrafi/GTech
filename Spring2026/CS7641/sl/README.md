@@ -1,4 +1,4 @@
-# CS7641 Supervised Learning - Spring 2026
+# Supervised Learning - Spring 2026
 
 This repository contains the code and analysis for the supervised learning report on the Adult Income and Wine Quality datasets.
 
