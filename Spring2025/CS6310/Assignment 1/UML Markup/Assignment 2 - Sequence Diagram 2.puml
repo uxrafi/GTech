@@ -1,0 +1,107 @@
+\' One complete turn of a battle where Pokémon Y attacks Pokémon X and Pokemon X does defend itself
+
+@startuml
+title Pokemon Y Attacks Pokemon X (Pokemon X Defends)
+
+skinparam ParticipantBackgroundColor #F0F0F0
+skinparam ParticipantBorderColor #000000
+skinparam ParticipantFontColor #000000
+
+skinparam SequenceMessageColor #0000FF
+skinparam SequenceArrowColor #0000FF
+
+skinparam SequenceLifeLineBorderColor #000000
+skinparam SequenceLifeLineBackgroundColor #FFFFFF
+
+skinparam BoxPadding 10
+skinparam BoxBorderColor #000000
+skinparam BoxBackgroundColor #E0E0E0
+
+participant "pokemonX" as PX #FFCCCC
+participant "pokemonY" as PY #CCFFCC
+participant "RandomGenerator" as RG #CCCCFF
+participant "AttackSkill" as AS #FFCC99
+participant "DefenseSkill" as DS #99CCFF
+participant "Battle" as B #FFCCFF
+participant "BattleReferee" as BR #99CCFF
+
+== Start of Turn - Pokemon Y's Action ==
+activate B #FFCCFF
+B -> PY: decideAction()
+activate PY #CCFFCC
+
+== Check Health Ratio ==
+PY -> PY: calculateHealthLevel()
+PY --> PY: healthLevel (float)
+
+== Random Decision to Attack ==
+PY -> RG: nextInt(10)
+activate RG #CCCCFF
+RG --> PY: randomValue (Integer)
+deactivate RG
+
+alt randomValue >= attackThreshold
+    note over PY: Pokémon Y Decides to Attack
+
+    == Retrieve Attack Skills ==
+    PY -> AS: getAttackSkills()
+    AS --> PY: attackSkillsList (List<Skill>)
+
+    == Randomly Select an Attack Skill ==
+    PY -> RG: nextInt(attackSkillsList.size())
+    activate RG #CCCCFF
+    RG --> PY: attackIndex (Integer)
+    deactivate RG
+
+    PY -> PY: selectAttackSkill(attackIndex)
+    PY --> B: attack (opponent, skill)
+
+    == Apply Attack ==
+    B -> B: applyEffect(PX)
+    B -> PX: takeDamage(damage)
+
+    == Pokémon X Defends Itself ==
+    PX -> DS: getDefenseSkills()
+    activate DS #FDAACC
+    DS --> PX: defenseSkillsList (List<Skill>)
+    deactivate DS
+
+    PX -> RG: nextInt(defenseSkillsList.size())
+    activate RG #CCCCFF
+    RG --> PX: defenseIndex (Integer)
+    deactivate RG
+
+    PX -> PX: selectDefenseSkill(defenseIndex)
+    PX --> B: defend (skill)
+
+    B -> B: applyEffect(PX)
+
+    == Calculate Reduced Damage ==
+    B -> B: calculateReducedDamage()
+
+    B -> PX: takeDamage(reducedDamage)
+
+    == Battle Status Check ==
+    B -> BR: checkBattleStatus()
+    activate BR #99CCFF
+    BR -> PX: checkFaint()
+    PX --> BR: faintedStatus (Boolean)
+
+    alt Fainted
+        BR -> BR: declareWinner("PY")
+        BR -> BR: logEvent("PY attacked PX with [skillName]. PX fainted after attack")
+        BR -> B: endBattle()
+    else Not Fainted
+        BR -> BR: logEvent("PY attacked PX with [skillName], damage: [reducedDamage]")
+        BR --> B: continueBattle()
+    end
+    deactivate BR
+else randomValue < attackThreshold
+    note over PY: Pokémon Y Decides to Defend
+end
+
+== End of Turn ==
+deactivate PY
+deactivate B
+
+@enduml

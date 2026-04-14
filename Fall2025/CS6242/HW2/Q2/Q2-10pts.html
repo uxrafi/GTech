@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Q2 Force-Directed Graph</title>
+<style>
+  svg {
+    border: 1px solid #ccc;
+  }
+  path.link {
+    fill: none;
+    stroke-width: 2px;
+  }
+  circle.node-circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+    cursor: pointer;
+  }
+  text.label {
+    font: bold 12px sans-serif;
+    pointer-events: none;
+  }
+  #credit {
+    font: bold 14px sans-serif;
+    fill: black;
+    text-anchor: end;
+  }
+</style>
+</head>
+<body>
+<script src="../lib/d3.v5.min.js"></script>
+<script>
+d3.csv("board_games.csv").then(function(data) {
+  // Build nodes
+  var nodes = {};
+  data.forEach(d => {
+    if (!nodes[d.source]) nodes[d.source] = {name: d.source, degree: 0, pinned: false};
+    if (!nodes[d.target]) nodes[d.target] = {name: d.target, degree: 0, pinned: false};
+    nodes[d.source].degree++;
+    nodes[d.target].degree++;
+  });
+
+  // Convert links
+  var links = data.map(d => ({
+    source: nodes[d.source],
+    target: nodes[d.target],
+    value: +d.value
+  }));
+
+  var width = 1200, height = 700;
+  var svg = d3.select("body").append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+  // Add GT username
+  svg.append("text")
+     .attr("id", "credit")
+     .attr("x", width - 10)
+     .attr("y", 20)
+     .text("urafi3");
+
+  // Scales
+  var radiusScale = d3.scaleSqrt()
+                      .domain(d3.extent(Object.values(nodes), d => d.degree))
+                      .range([5, 20]);
+
+  var colorScale = d3.scaleLinear()
+                     .domain(d3.extent(Object.values(nodes), d => d.degree))
+                     .range(["lightblue", "darkblue"]);
+
+  // Force simulation
+  var simulation = d3.forceSimulation(Object.values(nodes))
+                     .force("link", d3.forceLink(links).id(d => d.name).distance(100))
+                     .force("charge", d3.forceManyBody().strength(-250))
+                     .force("center", d3.forceCenter(width / 2, height / 2));
+
+  // Draw links
+  var link = svg.append("g")
+                .attr("class", "links")
+                .selectAll("path")
+                .data(links)
+                .enter().append("path")
+                .attr("class", "link")
+                .attr("stroke", d => d.value === 0 ? "gray" : "green")
+                .attr("stroke-width", d => d.value === 0 ? 3 : 1.5)
+                .attr("stroke-dasharray", d => d.value === 0 ? null : "4,2");
+
+  // Draw nodes
+  var node = svg.selectAll(".node")
+                .data(simulation.nodes())
+                .enter().append("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+
+  node.append("circle")
+      .attr("r", d => radiusScale(d.degree))
+      .attr("fill", d => colorScale(d.degree))
+      .attr("id", d => d.name.replace(/\s+/g,'').toLowerCase())
+      .attr("class", "node-circle");
+
+  node.append("text")
+      .attr("class", "label")
+      .attr("dx", 10)
+      .attr("dy", -10)
+      .text(d => d.name);
+
+  // Double-click to unpin
+  node.on("dblclick", function(event, d) {
+    d.fx = null;
+    d.fy = null;
+    d.pinned = false;
+    d3.select(this).select(".node-circle").attr("fill", colorScale(d.degree));
+    simulation.alphaTarget(0.3).restart(); // Resume simulation
+  });
+
+  // Simulation tick
+  simulation.on("tick", () => {
+    link.attr("d", function(d) {
+      var dx = d.target.x - d.source.x,
+          dy = d.target.y - d.source.y,
+          dr = Math.sqrt(dx * dx + dy * dy);
+      return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+    });
+
+    node.attr("transform", d => `translate(${d.x},${d.y})`);
+  });
+
+  // Drag functions
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+    d.pinned = true;
+    d3.select(this).select(".node-circle").attr("fill", "orange"); // Color change
+  }
+
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
+
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    if (!d.pinned) {
+      d.fx = null;
+      d.fy = null;
+    }
+  }
+
+}).catch(function(error) {
+  console.error("Error loading the CSV file: ", error);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# pdfs and docs
+*.pdf
+*.docx
+
+
+# Virtual environment folders (if any)
+venv/
+env/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+*.vscode/
+*.idea/
+
+# Ignore Jupyter checkpoints (optional)
+.ipynb_checkpoints/
+
+# Ignore temporary logs or backups
+*.log
+*~
+
+# Do NOT ignore outputs/ or PDF reports, since you want them tracked
+# outputs/
+# *.pdf

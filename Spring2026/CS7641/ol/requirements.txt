@@ -1,0 +1,6 @@
+torch>=1.9.0        # PyTorch for custom neural nets and GPU support
+numpy>=1.21         # array operations, used pretty much everywhere
+pandas>=1.3         # data loading and preprocessing
+scikit-learn>=1.0   # decision trees, kNN, SVM, MLP and cross-validation utilitys
+matplotlib>=3.4     # plotting training curves and results
+seaborn>=0.11       # nicer looking plots for the report figures
