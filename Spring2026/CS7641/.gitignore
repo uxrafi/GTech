@@ -4,10 +4,6 @@ __pycache__/
 *.pyo
 *.pyd
 
-# pdfs and docs
-*.pdf
-*.docx
-
 
 # Virtual environment folders (if any)
 venv/
