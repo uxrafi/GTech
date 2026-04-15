@@ -70,24 +70,24 @@ To explore a specific course:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-This repository is intended as a personal academic archive.  
+🤝 This repository is intended as a personal academic archive.  
 Contributions are not expected, but feel free to fork or reference the material for learning purposes.
 
 ---
 
-## 📄 License
+## License
 
-This repository is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+📄 This repository is licensed under the MIT License.
 
 ---
 
-## 📬 Contact
+## Contact
 
-**Umar Rafi**  
-📧 Email: [uxrafi@hotmail.com](mailto:uxrafi@hotmail.com)  
-🔗 GitHub: https://github.com/uxrafi
+📬 **Umar Rafi**  
+Email: [uxrafi@hotmail.com](mailto:uxrafi@hotmail.com)  
+GitHub: https://github.com/uxrafi
 
 ---
 
