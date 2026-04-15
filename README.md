@@ -1,6 +1,6 @@
-# Georgia Tech
+# Georgia Tech OMSCS Coursework
 
-Welcome to my personal repository for coursework completed as part of the Master of Science in Computer Science program at Georgia Institute of Technology.  
+Welcome to my personal repository for coursework completed as part of the **Master of Science in Computer Science (OMSCS)** program at the Georgia Institute of Technology.
 
 This repository includes assignments, projects, and related materials organized by semester and course.
 
@@ -9,84 +9,85 @@ This repository includes assignments, projects, and related materials organized 
 ## Table of Contents
 
 - [Semesters](#semesters)
-- [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
-
+---
 
 ## Semesters
 
-The repository is structured as follows:
+### 📌 Spring2025 — CS6310
 
-OCSMS    
-│  
-├── SPRING 2025     
-    ├── CS6310  
-      ├── [Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201) 
-      └── [Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203) 
-| 
-|
-├── SUMMER 2025  
-    ├── [CS7646](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer) 
-      ├── [Project 1](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale) 
-      ├── [Project 2](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/optimize_something) 
-      ├── [Project 3](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/assess_learners) 
-      ├── [Project 4](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale) 
-      ├── [Project 5](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/marketsim) 
-      ├── [Project 6](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/indicator_evaluation) 
-      ├── [Project 7](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/qlearning_robot) 
-      └── [Project 8](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/strategy_evaluation) 
-|
-│ 
-├── FALL 2025     
-│   ├── CS7641    
-│     ├── Week 2    
-│     ├── Week 3  
-│     └── Week ...      
-│      
-└── README.md  
-
-
-Each course folder contains:
-- Assignment code  
-- Project reports  
-- Helper scripts  
-- Documentation/notes
+- [Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201)  
+- [Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203)
 
 ---
 
-## Getting Started
+### 📌 Summer2025 — CS7646 (Machine Learning for Trading)
 
-To explore solutions from a specific course:
-1. Navigate to the appropriate semester folder.
-2. Open the course directory.
-3. Review assignment notebooks, Python scripts, or writeups.
+- [Assess Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/assess_learners)  
+- [Assess Portfolio](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/assess_portfolio)  
+- [Defeat Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/defeat_learners)  
+- [Indicator Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/indicator_evaluation)  
+- [Market Simulator](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/marketsim)  
+- [Martingale](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/martingale)  
+- [Optimize Something](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/optimize_something)  
+- [Strategy Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/strategy_evaluation)
 
-> Note: These materials are for educational reference only.  
-> Please comply with the Georgia Tech Honor Code and OMSCS Academic Integrity Policy.
+---
+
+### 📌 Fall2025 — CS6242 (Data Visualization)
+
+- [HW1](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW1)  
+- [HW2](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW2)  
+- [HW3](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW3)  
+- [HW4](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW4)  
+- [Project](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/Project)
+
+---
+
+### 📌 Spring2026 — CS7641 (Machine Learning)
+
+- [Supervised Learning (SL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/sl)  
+- [Optimization (OL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/ol)  
+- [Unsupervised Learning (UL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/ul)  
+- [Reinforcement Learning (RL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/rl)
+
+---
+
+## 🚀 Getting Started
+
+To explore a specific course:
+
+1. Navigate to the desired semester folder  
+2. Open the course directory  
+3. Review code, reports, and outputs  
+
+> ⚠️ **Note:**  
+> These materials are shared for educational purposes only.  
+> Please adhere to the Georgia Tech Honor Code and OMSCS Academic Integrity Policy.
 
 ---
 
 ## Contributing
 
-This repository serves as a personal academic archive.  
-External contributions are not expected, but feel free to fork or reference the content for your own learning.
+🤝 This repository is intended as a personal academic archive.  
+Contributions are not expected, but feel free to fork or reference the material for learning purposes.
 
 ---
 
 ## License
 
-This repository is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+📄 This repository is licensed under the MIT License.
 
 ---
 
 ## Contact
 
-**Name**: Umar Rafi  
-**Email**: [uxrafi@hotmail.com](mailto:uxrafi@hotmail.com)  
-**GitHub**: [github.com/uxrafi](https://github.com/uxrafi)
+📬 **Umar Rafi**  
+Email: [uxrafi@hotmail.com](mailto:uxrafi@hotmail.com)  
+GitHub: https://github.com/uxrafi
 
 ---
 
