@@ -49,10 +49,10 @@ This repository includes assignments, projects, and related materials organized 
 
 ### 📌 Spring2026 — CS7641 (Machine Learning)
 
-- Supervised Learning (SL)  
-- Reinforcement Learning (RL)  
-- Unsupervised Learning (UL)  
-- Optimization (OL)
+- [Supervised Learning (SL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/sl)  
+- [Optimization (OL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/ol)  
+- [Unsupervised Learning (UL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/ul)  
+- [Reinforcement Learning (RL)](https://github.com/uxrafi/GTech/tree/main/Spring2026/CS7641/rl)
 
 ---
 
