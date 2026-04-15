@@ -20,39 +20,41 @@ This repository includes assignments, projects, and related materials organized 
 
 ### 📚 Repository Structure
 
+```
 GTech/
 ├── Spring2025/
-│ └── CS6310/
-│ ├── Assignment 1
-│ └── Assignment 3
+│   └── CS6310/
+│       ├── Assignment 1
+│       └── Assignment 3
 │
 ├── Summer2025/
-│ └── CS7646/
-│ ├── assess_learners
-│ ├── assess_portfolio
-│ ├── defeat_learners
-│ ├── indicator_evaluation
-│ ├── marketsim
-│ ├── martingale
-│ ├── optimize_something
-│ └── strategy_evaluation
+│   └── CS7646/
+│       ├── assess_learners
+│       ├── assess_portfolio
+│       ├── defeat_learners
+│       ├── indicator_evaluation
+│       ├── marketsim
+│       ├── martingale
+│       ├── optimize_something
+│       └── strategy_evaluation
 │
 ├── Fall2025/
-│ └── CS6242/
-│ ├── HW1
-│ ├── HW2
-│ ├── HW3
-│ ├── HW4
-│ └── Project
+│   └── CS6242/
+│       ├── HW1
+│       ├── HW2
+│       ├── HW3
+│       ├── HW4
+│       └── Project
 │
 ├── Spring2026/
-│ └── CS7641/
-│ ├── SL (Supervised Learning)
-│ ├── RL (Reinforcement Learning)
-│ ├── UL (Unsupervised Learning)
-│ └── OL (Optimization)
+│   └── CS7641/
+│       ├── SL (Supervised Learning)
+│       ├── RL (Reinforcement Learning)
+│       ├── UL (Unsupervised Learning)
+│       └── OL (Optimization)
 │
 └── README.md
+```
 
 
 OCSMS    
