@@ -17,7 +17,7 @@ This repository includes assignments, projects, and related materials organized 
 
 ## Semesters
 
-### 📌 Spring2025 — CS6310
+### 📌 Spring2025 — CS6310 (Software Architecture and Design)
 
 - [Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201)  
 - [Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203)
