@@ -1,6 +1,6 @@
-# Georgia Tech
+# Georgia Tech OMSCS Coursework
 
-Welcome to my personal repository for coursework completed as part of the Master of Science in Computer Science program at Georgia Institute of Technology.  
+Welcome to my personal repository for coursework completed as part of the **Master of Science in Computer Science (OMSCS)** program at the Georgia Institute of Technology.
 
 This repository includes assignments, projects, and related materials organized by semester and course.
 
@@ -14,11 +14,46 @@ This repository includes assignments, projects, and related materials organized 
 - [License](#license)
 - [Contact](#contact)
 
-
+---
 
 ## Semesters
 
-The repository is structured as follows:
+### 📚 Repository Structure
+
+GTech/
+├── Spring2025/
+│ └── CS6310/
+│ ├── Assignment 1
+│ └── Assignment 3
+│
+├── Summer2025/
+│ └── CS7646/
+│ ├── assess_learners
+│ ├── assess_portfolio
+│ ├── defeat_learners
+│ ├── indicator_evaluation
+│ ├── marketsim
+│ ├── martingale
+│ ├── optimize_something
+│ └── strategy_evaluation
+│
+├── Fall2025/
+│ └── CS6242/
+│ ├── HW1
+│ ├── HW2
+│ ├── HW3
+│ ├── HW4
+│ └── Project
+│
+├── Spring2026/
+│ └── CS7641/
+│ ├── SL (Supervised Learning)
+│ ├── RL (Reinforcement Learning)
+│ ├── UL (Unsupervised Learning)
+│ └── OL (Optimization)
+│
+└── README.md
+
 
 OCSMS    
 │  
