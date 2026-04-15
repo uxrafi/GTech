@@ -18,63 +18,42 @@ This repository includes assignments, projects, and related materials organized 
 
 ## Semesters
 
-### 📚 Repository Structure
+### 📌 Spring2025 — CS6310
 
-```
-GTech/
-├── Spring2025/
-│   └── CS6310/
-│       ├── Assignment 1
-│       └── Assignment 3
-│
-├── Summer2025/
-│   └── CS7646/
-│       ├── assess_learners
-│       ├── assess_portfolio
-│       ├── defeat_learners
-│       ├── indicator_evaluation
-│       ├── marketsim
-│       ├── martingale
-│       ├── optimize_something
-│       └── strategy_evaluation
-│
-├── Fall2025/
-│   └── CS6242/
-│       ├── HW1
-│       ├── HW2
-│       ├── HW3
-│       ├── HW4
-│       └── Project
-│
-├── Spring2026/
-│   └── CS7641/
-│       ├── SL (Supervised Learning)
-│       ├── RL (Reinforcement Learning)
-│       ├── UL (Unsupervised Learning)
-│       └── OL (Optimization)
-│
-└── README.md
-```
-
-
+- [Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201)  
+- [Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203)
 
 ---
 
-### 🔗 Quick Links
+### 📌 Summer2025 — CS7646 (Machine Learning for Trading)
 
-#### Spring 2025
-- [CS6310 Assignment 1](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%201)  
-- [CS6310 Assignment 3](https://github.com/uxrafi/GTech/tree/main/Spring2025/CS6310/Assignment%203)
+- [Assess Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/assess_learners)  
+- [Assess Portfolio](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/assess_portfolio)  
+- [Defeat Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/defeat_learners)  
+- [Indicator Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/indicator_evaluation)  
+- [Market Simulator](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/marketsim)  
+- [Martingale](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/martingale)  
+- [Optimize Something](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/optimize_something)  
+- [Strategy Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/CS7646/strategy_evaluation)
 
-#### Summer 2025 — CS7646 (Machine Learning for Trading)
-- [Assess Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/assess_learners)  
-- [Assess Portfolio](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/assess_portfolio)  
-- [Defeat Learners](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/defeat_learners)  
-- [Indicator Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/indicator_evaluation)  
-- [Market Simulator](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/marketsim)  
-- [Martingale](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/martingale)  
-- [Optimize Something](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/optimize_something)  
-- [Strategy Evaluation](https://github.com/uxrafi/GTech/tree/main/Summer2025/ML4T_2025Summer/strategy_evaluation)
+---
+
+### 📌 Fall2025 — CS6242 (Data Visualization)
+
+- [HW1](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW1)  
+- [HW2](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW2)  
+- [HW3](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW3)  
+- [HW4](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/HW4)  
+- [Project](https://github.com/uxrafi/GTech/tree/main/Fall2025/CS6242/Project)
+
+---
+
+### 📌 Spring2026 — CS7641 (Machine Learning)
+
+- Supervised Learning (SL)  
+- Reinforcement Learning (RL)  
+- Unsupervised Learning (UL)  
+- Optimization (OL)
 
 ---
 
