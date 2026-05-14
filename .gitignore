@@ -1,0 +1,14 @@
+.env
+.env.*
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+*.log
+*.sqlite3
+secrets/
+credentials/
