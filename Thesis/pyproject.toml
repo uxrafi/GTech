@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "agentic-log-intelligence"
+version = "0.1.0"
+description = "Self-Adaptive Agentic Systems for Financial Log Intelligence"
+authors = ["Umar Rafi <uxrafi@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0"
+# Core LLM clients
+openai = "^1.0"
+anthropic = ">=0.30.0"
+# Optional LLM backends (comment out if not needed)
+dashscope = { version = "^1.0", optional = true }
+google-generativeai = { version = "^0.3", optional = true }
+# Database connectors
+neo4j = "^5.0"
+psycopg2-binary = "^2.9"
+# For local Ollama (uses openai client, already included)
+fastapi = "^0.136.1"
+uvicorn = "^0.46.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0"
+black = "^23.0"
+ruff = "^0.1"
+
+[tool.poetry.extras]
+qwen = ["dashscope"]
+gemini = ["google-generativeai"]
+all = ["dashscope", "google-generativeai"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
