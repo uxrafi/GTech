@@ -1,0 +1,38 @@
+  
+# Data files (too large for GitHub)
+data/
+*.npy
+*.csv
+*.log
+
+# Model checkpoints (too large for GitHub)
+checkpoints/
+*.pt
+*.pth
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Results (generated, not source)
+results/plots/
+results/metrics/
