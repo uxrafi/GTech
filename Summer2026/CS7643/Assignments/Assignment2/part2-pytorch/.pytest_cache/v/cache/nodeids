@@ -1,0 +1,9 @@
+[
+  "tests/test_focalloss.py::TestFocalLoss::test_focal_loss_equals_ce_loss",
+  "tests/test_focalloss.py::TestFocalLoss::test_reweighting",
+  "tests/test_mymodel.py::TestMyModel::test_accuracy_easy",
+  "tests/test_mymodel.py::TestMyModel::test_accuracy_hard",
+  "tests/test_mymodel.py::TestMyModel::test_accuracy_medium",
+  "tests/test_twolayer.py::TestTwoLayer::test_accuracy",
+  "tests/test_vanilla_cnn.py::TestVanillaCNN::test_accuracy"
+]

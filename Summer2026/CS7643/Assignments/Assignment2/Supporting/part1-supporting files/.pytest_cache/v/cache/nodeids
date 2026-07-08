@@ -1,0 +1,11 @@
+[
+  "tests/test_conv.py::TestConv::test_backward",
+  "tests/test_conv.py::TestConv::test_forward",
+  "tests/test_linear.py::TestLinear::test_backward",
+  "tests/test_linear.py::TestLinear::test_forward",
+  "tests/test_maxpool.py::TestConv::test_backward",
+  "tests/test_maxpool.py::TestConv::test_forward",
+  "tests/test_relu.py::TestReLU::test_backward",
+  "tests/test_relu.py::TestReLU::test_forward",
+  "tests/test_sgd.py::TestSGD::test_sgd"
+]
