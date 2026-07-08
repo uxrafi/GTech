@@ -1,0 +1,14 @@
+name: cs7643-a3-nlp
+channels:
+  - defaults
+dependencies:
+  - python==3.8.10
+  - matplotlib
+  - tqdm
+  - jupyter
+  - pip
+  - pip:
+    - torch<=2.6.0
+    - notebook
+    - numpy
+
