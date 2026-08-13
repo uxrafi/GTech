@@ -1,40 +1,45 @@
-# SBKU — Anomaly Detection in Agent Execution Logs
+# Sequence Models for AI-Agent Execution Log Anomaly Detection:
+## A Comparative Study Using the HDFS Benchmark
 
-**CS7643 Deep Learning | Georgia Tech | Summer 2026**  
-**Team:** Umar Rafi, Daniel Bird, Sean McGee, Ahmed Khamis
+**CS7643: Deep Learning**  
+**Georgia Institute of Technology**  
+**Summer 2026**
+
+### Team
+- Umar Rafi
+- Daniel Bird
+- Sean McGee
+- Ahmed Khamis
 
 ---
 
 ## Project Overview
 
-This project builds a deep learning system to detect anomalies in AI agent 
-execution logs. The system analyzes sequences of log events from the HDFS 
-dataset to identify unusual patterns that may indicate misbehavior, compliance 
-violations, or system failures.
+This repository contains the implementation for our CS7643 Deep Learning project on sequence-based anomaly detection for AI-agent execution logs using the HDFS benchmark dataset.
 
-Normal agent execution follows predictable patterns. Our model learns what 
-"normal" looks like, then flags deviations from expected behavior.
+We compare four supervised classification models:
 
-**ML Task:** Supervised binary sequence classification (Normal vs Anomalous)  
-**Model:** LSTM-based recurrent neural network  
-**Dataset:** HDFS (Hadoop Distributed File System) log dataset  
+- Logistic Regression (bag-of-events baseline)
+- Recurrent Neural Network (LSTM)
+- Transformer Encoder
+- 1D Convolutional Neural Network (CNN)
 
----
+Although public benchmarks for AI-agent execution logs remain limited, the HDFS benchmark provides ordered execution traces that serve as a reproducible proxy for many structural characteristics of autonomous agent workflows. The models are evaluated using Precision, Recall, F1-score, ROC-AUC, and PR-AUC to compare their effectiveness at detecting anomalous execution sequences.
 
-## Repository Structure
+The dataset comes from https://github.com/logpai/loghub
 
 ---
 
 ## Setup
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/[your-repo]/sbku-anomaly-detection.git
-cd sbku-anomaly-detection
+git clone https://github.gatech.edu/urafi3/CS7643-Project.git
+cd CS7643-Project
 ```
 
-### 2. Create a virtual environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
@@ -42,113 +47,59 @@ python -m venv venv
 # Windows
 venv\Scripts\activate
 
-# Mac/Linux
+# macOS / Linux
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Download the HDFS dataset
+### 4. Download the HDFS Dataset
 
-Download from: https://github.com/logpai/loghub  
-Place raw log files in `data/raw/`
+Download from: https://drive.google.com/file/d/1C1f6SxJq-n3hU3F7owUMRQL7DM6NtWSW/view?usp=drive_link
+Place the unzipped data directory in `CS7643-Project`
 
 ---
 
 ## How to Run
 
-### Step 1 — Preprocess the data
+### Logistic regression
 
 ```bash
-python preprocessing/log_preprocessing.py
+python models/logistic_regression.py
 ```
 
-Outputs `.npy` sequence files to `data/sequences/`.
+Output metrics will be in `results/logreg`
 
-### Step 2 — Train the model
+### RNN with LSTM
 
 ```bash
-python models/train_rnn.py
+python models/train_logistic_regression.py
 ```
 
-Saves best checkpoint to `checkpoints/best_model.pt`.
+Output metrics will be in `results/rnn`
 
-### Step 3 — Evaluate the model
+### Transformer
 
 ```bash
-python models/evaluate_model.py
+python models/train_transformer.py
 ```
 
-Outputs accuracy, precision, recall, F1, and AUC-ROC to `results/metrics/`.
+Output metrics will be in `results/transformer`
 
-### Step 4 — Run the API server
+### CNN 1D
 
 ```bash
-uvicorn api.api_server:app --reload
+python models/train_cnn.py
 ```
 
-API available at `http://localhost:8000`
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Owner | Description |
-|--------|----------|-------|-------------|
-| POST | `/logs/ingest` | Umar | Ingest raw log sequences |
-| POST | `/analyze` | Umar | Run anomaly detection |
-| GET | `/flags` | Sean | Retrieve flagged violations |
-| GET | `/audit` | Ahmed | Retrieve audit log |
-| GET | `/metrics` | Umar | Model performance metrics |
-
----
-
-## Branching Convention
-
-| Branch | Owner | Purpose |
-|--------|-------|---------|
-| `main` | All | Clean working code only |
-| `daniel/preprocessing` | Daniel | Week 1 data pipeline |
-| `umar/model` | Umar | Week 2 LSTM training |
-| `sean/services` | Sean | Week 3 services |
-| `ahmed/services` | Ahmed | Week 3 services |
-
-Merge to `main` via pull request at the end of each week.  
-Always pull from `main` before starting new work.
-
----
-
-## Team Contributions
-
-| Member | Role | Responsibilities |
-|--------|------|-----------------|
-| Umar Rafi | Model + API | LSTM architecture, training, evaluation, FastAPI server |
-| Daniel Bird | Data + Testing | Preprocessing pipeline, integration testing, figures |
-| Sean McGee | Services + API | LogIngestion, AnomalyDetection services, /flags endpoint |
-| Ahmed Khamis | Services + API | Flagging, Audit services, /audit endpoint |
-
----
-
-## Target Results
-
-| Metric | Target |
-|--------|--------|
-| AUC-ROC | 95%+ |
-| Precision | 90%+ |
-| Recall | 90%+ |
-| API Latency | < 200ms |
-
----
+Output metrics will be in `results/cnn`
 
 ## Paper
 
 Final report written in LaTeX via Overleaf:  
-https://www.overleaf.com/read/fdjpfsdhztfp
-
-Format: 4-6 page conference-style paper  
-Submission: Gradescope (PDF)
+https://www.overleaf.com/project/6a5cfa7130528a2235fdf7e9
 
