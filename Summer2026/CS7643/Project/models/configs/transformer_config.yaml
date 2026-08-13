@@ -1,0 +1,25 @@
+data_dir: sequences
+checkpoint_dir: checkpoints
+results_dir: results
+
+vocab_size: 31
+max_len: 50
+pad_id: 0
+
+d_model: 128
+nhead: 4
+num_layers: 2
+dim_feedforward: 256
+dropout: 0.1
+
+batch_size: 512
+epochs: 12
+lr: 0.0001
+weight_decay: 0.01
+pos_weight: auto
+
+device: auto
+seed: 42
+select_metric: val_roc_auc
+
+inference_batch_size: 1024

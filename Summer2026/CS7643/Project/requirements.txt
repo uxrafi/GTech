@@ -1,0 +1,12 @@
+numpy
+pandas
+torch
+scikit-learn
+matplotlib
+jupyter
+tqdm
+pyyaml
+fastapi
+uvicorn
+pytest
+requests
